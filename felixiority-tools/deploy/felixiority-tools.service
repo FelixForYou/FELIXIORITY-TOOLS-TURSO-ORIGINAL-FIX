@@ -1,0 +1,22 @@
+[Unit]
+Description=Felixiority Tools
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=felix
+Group=felix
+WorkingDirectory=/opt/felixiority-tools
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+EnvironmentFile=/opt/felixiority-tools/.env
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3000
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/felixiority-tools/.next
+[Install]
+WantedBy=multi-user.target
